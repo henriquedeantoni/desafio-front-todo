@@ -1,6 +1,5 @@
-import React from 'react';
 import { createBrowserRouter } from "react-router-dom";
-import TodoPage from '../pages/TodoPage'
+import TodoPage from '../pages/TodoPage/TodoPage'
 import App from '../App';
 
 const routes = [

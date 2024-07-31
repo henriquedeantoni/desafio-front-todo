@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import TodoForm from '../components/TodoForm';
-import TodoList from '../components/TodoList';
+import TodoForm from '../../components/TodoForm/TodoForm';
+import TodoList from '../../components/TodoList/TodoList';
+import Header from '../../components/Header/Header';
+import { PageContainer, ColumnContainer, Column } from './styles';
 
 enum TodoStatus {
   Todo = 'todo',
@@ -15,7 +17,6 @@ interface Todo {
 }
 
 const TodoPage: React.FC = () => {
-
   const [todos, setTodos] = useState<Todo[]>([]);
 
   const addTodo = (text: string) => {
@@ -32,24 +33,25 @@ const TodoPage: React.FC = () => {
   };
 
   return (
-    <div className='container mx-auto p-4'>
-      <h1 className='text-2x1 font-bold mb-4'>Todo List</h1>
+    <PageContainer>
+      <Header userName="Fulano" userImage="path-to-user-image.jpg" />
+      <h1 className='text-2xl font-bold mb-4'>Todo List</h1>
       <TodoForm addTodo={addTodo} />
-      <div className="grid grid-cols-3 gap-4">
-        <div>
+      <ColumnContainer>
+        <Column style={{ borderColor: '#3b82f6' }}>
           <h2 className="text-xl font-semibold">Todo</h2>
           <TodoList todos={todos.filter(todo => todo.status === TodoStatus.Todo)} changeStatus={changeStatus} />
-        </div>
-        <div>
+        </Column>
+        <Column style={{ borderColor: '#f59e0b' }}>
           <h2 className="text-xl font-semibold">In Progress</h2>
           <TodoList todos={todos.filter(todo => todo.status === TodoStatus.InProgress)} changeStatus={changeStatus} />
-        </div>
-        <div>
+        </Column>
+        <Column style={{ borderColor: '#10b981' }}>
           <h2 className="text-xl font-semibold">Concluded</h2>
           <TodoList todos={todos.filter(todo => todo.status === TodoStatus.Concluded)} changeStatus={changeStatus} />
-        </div>
-      </div>
-    </div>
+        </Column>
+      </ColumnContainer>
+    </PageContainer>
   );
 };
 
