@@ -4,6 +4,10 @@ export const Form = styled.form`
   margin-bottom: 1rem;
 `;
 
+export const Card = styled.div`
+    
+`
+
 export const Input = styled.input<{ error?: boolean }>`
   border: 1px solid;
   border-color: ${props => (props.error ? 'red' : '#ddd')};

@@ -1,6 +1,8 @@
-import React from 'react';
-import { HeaderContainer, UserImage, SearchContainer, SearchInput, SearchIcon } from './styles';
-import anoninous from '../assets/anonimous.jpg'
+import React, { useEffect, useState } from 'react';
+import { HeaderContainer, DivName, UserImage, SearchContainer, SearchInput, SearchIcon, DivSearch, Time } from './styles';
+import anonimous from '../../assets/anonimous.jpg'
+import logo from '../../assets/everest-logo.svg'
+import searchIcon from '../../assets/search-icon.png'
 
 interface HeaderProps {
   userName: string;
@@ -8,18 +10,28 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({ userName, userImage }) => {
+  const [localTime, setLocalTime] = useState<string>("");
+
+  useEffect(()=>{
+      const date = new Date().toLocaleDateString();
+      setLocalTime(date)
+  },[])
+
+
   return (
     <HeaderContainer>
-      <div className="text-lg font-bold">
-        Boa tarde, {userName}
-      </div>
-      <div className="flex items-center">
-        <UserImage src={anoninous} alt="User-image" />
+      <DivName >
+        <img src={logo} alt='logo-everest'></img>
+        <p>Boa tarde, {userName}  </p>
+      </DivName>
+      <DivSearch >
+        <UserImage src={anonimous} alt="User-image" />
         <SearchContainer>
           <SearchInput type="text" placeholder="Buscar..." />
-          <SearchIcon src="path-to-your-loupe-image.png" alt="Search" />
+          <SearchIcon src={searchIcon} alt="Search" />
         </SearchContainer>
-      </div>
+        <Time>Caxias do Sul, {localTime}</Time>
+      </DivSearch>
     </HeaderContainer>
   );
 };
