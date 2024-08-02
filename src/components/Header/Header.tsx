@@ -24,10 +24,11 @@ const Header: React.FC<HeaderProps> = ({ userName, userImage }) => {
         <img src={logo} alt='logo-everest'></img>
         <p>Boa tarde, {userName}  </p>
       </DivName>
+      <h1>Todo List</h1>
       <DivSearch >
         <UserImage src={anonimous} alt="User-image" />
         <SearchContainer>
-          <SearchInput type="text" placeholder="Buscar..." />
+          <SearchInput type="text" placeholder="Search..." />
           <SearchIcon src={searchIcon} alt="Search" />
         </SearchContainer>
         <Time>Caxias do Sul, {localTime}</Time>

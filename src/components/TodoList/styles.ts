@@ -5,26 +5,27 @@ export const List = styled.ul`
   list-style-position: inside;
 `;
 
-export const ListItem = styled.li`
-  margin-bottom: 0.5rem;
-`;
+export const Task = styled.li`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: white;
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 10px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  
+  input {
+    margin-right: 8px;
+  }
 
-export const Button = styled.button`
-  padding: 0.25rem 0.5rem;
-  border-radius: 0.375rem;
-  margin-right: 0.5rem;
-  color: white;
-  border: none;
-`;
+  p {
+    flex: 1;
+    margin: 0;
+  }
 
-export const TodoButton = styled(Button)`
-  background-color: #3b82f6;
-`;
-
-export const InProgressButton = styled(Button)`
-  background-color: #f59e0b;
-`;
-
-export const ConcludedButton = styled(Button)`
-  background-color: #10b981;
+  span {
+    font-size: 0.75rem;
+    color: #555;
+  }
 `;

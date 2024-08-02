@@ -1,5 +1,5 @@
 import React from 'react';
-import { List, ListItem, TodoButton, InProgressButton, ConcludedButton } from './styles';
+import { List, Task} from './styles';
 
 enum TodoStatus {
   Todo = 'todo',
@@ -22,20 +22,22 @@ const TodoList: React.FC<TodoListProps> = ({ todos, changeStatus }) => {
   return (
     <List>
       {todos.map(todo => (
-        <ListItem key={todo.id}>
-          <p>{todo.text}</p>
-          <div className="flex space-x-2">
-            <TodoButton onClick={() => changeStatus(todo.id, TodoStatus.Todo)}>
-              Todo
-            </TodoButton>
-            <InProgressButton onClick={() => changeStatus(todo.id, TodoStatus.InProgress)}>
-              In Progress
-            </InProgressButton>
-            <ConcludedButton onClick={() => changeStatus(todo.id, TodoStatus.Concluded)}>
-              Concluded
-            </ConcludedButton>
-          </div>
-        </ListItem>
+        <Task key={todo.id}>
+        <input
+          type="checkbox"
+          checked={todo.status === TodoStatus.Concluded}
+          onChange={() =>
+            changeStatus(
+              todo.id,
+              todo.status === TodoStatus.Concluded
+                ? TodoStatus.Todo
+                : TodoStatus.Concluded
+            )
+          }
+        />
+        <p>{todo.text}</p>
+        <span>ID: {todo.id}</span>
+        </Task>
       ))}
     </List>
   );

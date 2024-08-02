@@ -6,13 +6,18 @@ export const HeaderContainer = styled.header`
   align-items: center;
   padding: 1rem 0;
   background-color: #242424;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 3px solid #ddd;
   width: 100vw;
 
   p{
         color: rgba(255, 255, 255, 0.87);
         font-size: 1.5rem;
         font-weight: 600;
+  }
+
+  h1{
+    font-size: 2.5rem;
+    font-weight: 700;
   }
 `;
 
@@ -52,7 +57,7 @@ export const SearchIcon = styled.img`
 export const Time = styled.div`
     font-weight: 400;
     font-size: 0.75rem;
-    
+
 `
 
 export const DivSearch = styled.div`
