@@ -1,5 +1,6 @@
 import React from 'react';
-import { List, Task} from './styles';
+import { List, Task, Title, DeleteButton, ApproveButton} from './styles';
+import  {Todo} from '../../services/TodoService'
 
 enum TodoStatus {
   Todo = 'todo',
@@ -10,33 +11,40 @@ enum TodoStatus {
 interface TodoListProps {
   todos: Todo[];
   changeStatus: (id: number, status: TodoStatus) => void;
+  deleteTodo: (id: number) => void;
+  toggleCheck: (id: number) => void;
 }
 
-interface Todo {
-  id: number;
-  text: string;
-  status: string;
-}
+const TodoList: React.FC<TodoListProps> = ({ todos, changeStatus, deleteTodo, toggleCheck }) => {
+  const handleApprove = (todo: Todo) => {
+    if (todo.status === TodoStatus.Todo) {
+      changeStatus(todo.id, TodoStatus.InProgress);
+    } else if (todo.status === TodoStatus.InProgress) {
+      changeStatus(todo.id, TodoStatus.Concluded);
+    }
+  };
 
-const TodoList: React.FC<TodoListProps> = ({ todos, changeStatus }) => {
+  
   return (
     <List>
       {todos.map(todo => (
         <Task key={todo.id}>
-        <input
-          type="checkbox"
-          checked={todo.status === TodoStatus.Concluded}
-          onChange={() =>
-            changeStatus(
-              todo.id,
-              todo.status === TodoStatus.Concluded
-                ? TodoStatus.Todo
-                : TodoStatus.Concluded
-            )
-          }
-        />
-        <p>{todo.text}</p>
-        <span>ID: {todo.id}</span>
+          <Title>Task ID: {todo.id}</Title>
+          <p>{typeof todo.content === 'string' ? todo.content : todo.content.title}</p>
+            <label>
+              <input
+                type="checkbox"
+                checked={todo.checked}
+                onChange={() => toggleCheck(todo.id)}
+              />
+              Checked by Team
+            </label>
+            <div>
+              {todo.status !== TodoStatus.Concluded && (
+                <ApproveButton onClick={() => handleApprove(todo)}>Approve</ApproveButton>
+              )}
+              <DeleteButton onClick={() => deleteTodo(todo.id)}>Delete</DeleteButton>
+            </div>
         </Task>
       ))}
     </List>

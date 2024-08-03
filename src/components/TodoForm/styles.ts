@@ -9,7 +9,7 @@ export const Form = styled.form`
 export const Card = styled.div`
     width: 18rem;
     height: 18rem;
-    border: 3px solid #E39774;
+    border: 1px solid #E39774;
     border-radius: 1rem;
     padding: 0.25rem;
     display: flex;  

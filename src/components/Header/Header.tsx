@@ -22,7 +22,7 @@ const Header: React.FC<HeaderProps> = ({ userName, userImage }) => {
     <HeaderContainer>
       <DivName >
         <img src={logo} alt='logo-everest'></img>
-        <p>Boa tarde, {userName}  </p>
+        <p>Hello, {userName}  </p>
       </DivName>
       <h1>Todo List</h1>
       <DivSearch >

@@ -6,7 +6,7 @@ export const HeaderContainer = styled.header`
   align-items: center;
   padding: 1rem 0;
   background-color: #242424;
-  border-bottom: 3px solid #ddd;
+  border-bottom: 1.5px solid #ddd;
   width: 100vw;
 
   p{

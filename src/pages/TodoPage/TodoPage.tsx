@@ -12,45 +12,75 @@ enum TodoStatus {
 
 interface Todo {
   id: number;
-  text: string;
+  content: string;
   status: TodoStatus;
+  checked: boolean;
 }
 
 const TodoPage: React.FC = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
 
-  const addTodo = (text: string) => {
+  const addTodo = (content: string) => {
     const newTodo: Todo = {
       id: todos.length + 1,
-      text,
+      content,
       status: TodoStatus.Todo,
+      checked: false,
     };
     setTodos([...todos, newTodo]);
+  };
+
+  const toggleCheck = (id: number) => {
+    setTodos(prevTodos =>
+      prevTodos.map(todo =>
+        todo.id === id ? { ...todo, isChecked: !todo.checked } : todo
+      )
+    );
   };
 
   const changeStatus = (id: number, status: TodoStatus) => {
     setTodos(todos.map(todo => todo.id === id ? { ...todo, status } : todo));
   };
 
+  const deleteTodo = (id: number) => {
+    setTodos(todos.filter(todo => todo.id !== id));
+  };
+
+
   return (
     <PageContainer>
-      <Header userName="Fulano" userImage="path-to-user-image.jpg" />
+      <Header userName="Henrique" userImage="path-to-user-image.jpg" />
       <Body>
         <ScanColumn>
           <TodoForm addTodo={addTodo} />
         </ScanColumn>
         <ColumnContainer>
           <Column style={{ borderColor: '#3b82f6' , backgroundColor: '#60a5fa' }}>
-            <h2 className="text-xl font-semibold">Todo</h2>
-            <TodoList todos={todos.filter(todo => todo.status === TodoStatus.Todo)} changeStatus={changeStatus} />
+            <h2>Todo</h2>
+            <TodoList
+              todos={todos.filter(todo => todo.status === TodoStatus.Todo)}
+              changeStatus={changeStatus}
+              deleteTodo={deleteTodo}
+              toggleCheck={toggleCheck}
+            />
           </Column>
           <Column style={{ borderColor: '#f59e0b' , backgroundColor: '#fbbf24' }}>
-            <h2 className="text-xl font-semibold">In Progress</h2>
-            <TodoList todos={todos.filter(todo => todo.status === TodoStatus.InProgress)} changeStatus={changeStatus} />
+            <h2>In Progress</h2>
+            <TodoList
+              todos={todos.filter(todo => todo.status === TodoStatus.InProgress)}
+              changeStatus={changeStatus}
+              deleteTodo={deleteTodo}
+              toggleCheck={toggleCheck}
+            />
           </Column>
           <Column style={{ borderColor: '#10b981' , backgroundColor: '#34d399' }}>
-            <h2 className="text-xl font-semibold">Concluded</h2>
-            <TodoList todos={todos.filter(todo => todo.status === TodoStatus.Concluded)} changeStatus={changeStatus} />
+            <h2>Concluded</h2>
+            <TodoList
+              todos={todos.filter(todo => todo.status === TodoStatus.Concluded)}
+              changeStatus={changeStatus}
+              deleteTodo={deleteTodo}
+              toggleCheck={toggleCheck}
+            />
           </Column>
         </ColumnContainer>
       </Body>

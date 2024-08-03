@@ -19,7 +19,7 @@ export const ScanColumn = styled.div`
   width: 19rem;
   height: 100%;
   background-color: #326273;
-  border-right: 3px solid #EEEEEE;
+  border-right: 1px solid #EEEEEE;
 `
 
 export const ColumnContainer = styled.div`
@@ -30,7 +30,7 @@ export const ColumnContainer = styled.div`
 `;
 
 export const Column = styled.div`
-  border: 4px solid;
+  border: 2px solid;
   border-radius: 1rem;
   padding: 1rem;
   width: 17rem;
