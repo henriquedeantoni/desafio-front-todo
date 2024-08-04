@@ -1,19 +1,45 @@
-![Everest Logo](public/everest-logo.svg?raw=true "Everest Logo")
+# Everest TODO Challenge
 
-# TODO App Challenge
+## Descrição
 
-Instructions for the implementation can be found in the [INSTRUCTIONS](./INSTRUCTIONS.md) doc.
+Este é um projeto de aplicação de lista de tarefas (TODO) desenvolvido com React e typescript. A aplicação permite gerenciar tarefas, com funcionalidades para adicionar, aprovar, deletar e marcar tarefas como concluídas. Inclui também a capacidade de filtrar tarefas e exibir mensagens de erro e sucesso.
 
-## Starting the app for the first time
+## Tecnologias Utilizadas
 
-### `yarn install`
+- **Front-End:**
+  - React
+  - TypeScript
+  - styled-components
+  - Axios (para consumo de API)
+  
 
-This will install all the dependencies of the project defined in `package.json`. Whenever that file changes, you will also need to re-run this command to make sure all packages are updated.
+## Estrutura do Projeto
 
-### `yarn start`
+- **src/**
+  - **api/**: Comunicação com Endpoint
+  - **components/**: Componentes React da aplicação.
+  - **pages/**: Paginas da aplicação
+  - **services/**: Serviços para manipulação de dados e consumo de API.
+  - **types/**: Definições de tipos e enums.
+  - **App.tsx**: Componente principal da aplicação.
+  
+- **public/**: Arquivos públicos, como imagens e o arquivo `index.html`.
+  
+- **styles/**: Arquivos de estilização, como CSS e styled components.
 
-Opens a browser tab pointing to [http://localhost:5173](http://localhost:5173).
+## Telas
 
-- Runs the app in the development mode.
-- The page will reload if you make edits.
-- You will also see any typing and lint errors in the console.
+![Tela TodoPage - Submmit a form and validate](assets/image_0.png)
+![Tela TodoPage - Error to approve a Task, must be checked first](assets/image_1.png)
+![Tela TodoPage - Task approved and assigned on In Progress](assets/image_2.png)
+![Tela TodoPage - Task approved and assigned on Concluded](assets/image_3.png)
+
+## Instalação e Configuração
+
+### Front-End
+
+1. Clone o repositório:
+
+   ```bash
+   git clone https://github.com/usuario/repo.git
+   cd repo

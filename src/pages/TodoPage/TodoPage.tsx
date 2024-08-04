@@ -3,14 +3,10 @@ import { useLocation } from 'react-router-dom';
 import TodoForm from '../../components/TodoForm/TodoForm';
 import TodoList from '../../components/TodoList/TodoList';
 import Header from '../../components/Header/Header';
-import { PageContainer, ScanColumn, Body, ColumnContainer, Column } from './styles';
+import * as S from './styles';
 import { todosList} from '../../services/TodoService';
 import {TodoStatus} from '../../types/TodoStatus';
 import {Todo} from '../../types/Todo';
-
-const API_URL = import.meta.env.VITE_APP_API_URL;
-console.log('API_URL:', API_URL);
-
 
 
 const TodoPage: React.FC = () => {
@@ -80,14 +76,14 @@ const TodoPage: React.FC = () => {
   if (error) return <p>{error}</p>;
 
   return (
-    <PageContainer>
+    <S.PageContainer>
       <Header userName={userName}/>
-      <Body>
-        <ColumnContainer>
-        <ScanColumn>
+      <S.Body>
+        <S.ColumnContainer>
+        <S.ScanColumn>
           <TodoForm addTodo={addTodo} />
-        </ScanColumn>
-          <Column style={{ borderColor: '#3b82f6' , backgroundColor: '#60a5fa' }}>
+        </S.ScanColumn>
+          <S.Column style={{ borderColor: '#3b82f6' , backgroundColor: '#60a5fa' }}>
             <h2>Todo</h2>
             <TodoList
               todos={todos
@@ -97,8 +93,8 @@ const TodoPage: React.FC = () => {
               deleteTodo={deleteTodo}
               toggleCheck={toggleCheck}
             />
-          </Column>
-          <Column style={{ borderColor: '#f59e0b' , backgroundColor: '#fbbf24' }}>
+          </S.Column>
+          <S.Column style={{ borderColor: '#f59e0b' , backgroundColor: '#fbbf24' }}>
             <h2>In Progress</h2>
             <TodoList
               todos={todos
@@ -108,8 +104,8 @@ const TodoPage: React.FC = () => {
               deleteTodo={deleteTodo}
               toggleCheck={toggleCheck}
             />
-          </Column>
-          <Column style={{ borderColor: '#10b981' , backgroundColor: '#34d399' }}>
+          </S.Column>
+          <S.Column style={{ borderColor: '#10b981' , backgroundColor: '#34d399' }}>
             <h2>Concluded</h2>
             <TodoList
               todos={todos
@@ -119,10 +115,10 @@ const TodoPage: React.FC = () => {
               deleteTodo={deleteTodo}
               toggleCheck={toggleCheck}
             />
-          </Column>
-        </ColumnContainer>
-      </Body>
-    </PageContainer>
+          </S.Column>
+        </S.ColumnContainer>
+      </S.Body>
+    </S.PageContainer>
   );
 };
 

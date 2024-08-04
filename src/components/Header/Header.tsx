@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { HeaderContainer, DivName, UserImage, SearchContainer, UserLoginInput, SearchIcon, DivUser, Time } from './styles';
+import * as S from './styles';
 import anonimous from '../../assets/anonimous.jpg'
 import logo from '../../assets/everest-logo.svg'
 import searchIcon from '../../assets/search-icon.png'
@@ -18,21 +18,21 @@ const Header: React.FC<HeaderProps> = ({ userName }) => {
 
 
   return (
-    <HeaderContainer>
-      <DivName >
+    <S.HeaderContainer>
+      <S.DivName >
         <img src={logo} alt='logo-everest'></img>
         <p>Hello, {userName}  </p>
-      </DivName>
+      </S.DivName>
       <h1>Todo List</h1>
-      <DivUser>
-        <UserImage src={anonimous} alt="User-image" />
-        <SearchContainer>
-          <UserLoginInput type="text" placeholder="********" />
-          <SearchIcon src={searchIcon} alt="Search" />
-        </SearchContainer>
-        <Time>Caxias do Sul, {localTime}</Time>
-      </DivUser>
-    </HeaderContainer>
+      <S.DivUser>
+        <S.UserImage src={anonimous} alt="User-image" />
+        <S.SearchContainer>
+          <S.UserLoginInput type="text" placeholder="********" />
+          <S.SearchIcon src={searchIcon} alt="Search" />
+        </S.SearchContainer>
+        <S.Time>Caxias do Sul, {localTime}</S.Time>
+      </S.DivUser>
+    </S.HeaderContainer>
   );
 };
 

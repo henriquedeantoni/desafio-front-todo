@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { List, Task, Title, DeleteButton, ApproveButton, Error} from './styles';
+import * as S from './styles';
 import {TodoStatus} from '../../types/TodoStatus';
 import {Todo} from '../../types/Todo';
 
@@ -32,16 +32,16 @@ const TodoList: React.FC<TodoListProps> = ({ todos, changeStatus, deleteTodo, to
     if (error) {
       const timer = setTimeout(() => {
         setError(null);
-      }, 3000);
+      }, 4000);
       return () => clearTimeout(timer);
     }
   }, [error]);
   
   return (
-    <List>
+    <S.List>
       {todos.map(todo => (
-        <Task key={todo.id}>
-          <Title>Task ID: {todo.id}</Title>
+        <S.Task key={todo.id}>
+          <S.Title>Task ID: {todo.id}</S.Title>
           <h1>{typeof todo.content === 'string' ? todo.content : todo.content.title}</h1>
             <label>
               <input
@@ -53,14 +53,14 @@ const TodoList: React.FC<TodoListProps> = ({ todos, changeStatus, deleteTodo, to
             </label>
             <div>
               {todo.status !== TodoStatus.Concluded && (
-                <ApproveButton onClick={() => handleApprove(todo)}>Approve</ApproveButton>
+                <S.ApproveButton onClick={() => handleApprove(todo)}>Approve</S.ApproveButton>
               )}
-              <DeleteButton onClick={() => deleteTodo(todo.id)}>Delete</DeleteButton>
+              <S.DeleteButton onClick={() => deleteTodo(todo.id)}>Delete</S.DeleteButton>
             </div>
-            {errorTaskId === todo.id &&  <Error>{error}</Error>}
-        </Task>
+            {errorTaskId === todo.id &&  <S.Error>{error}</S.Error>}
+        </S.Task>
       ))}
-    </List>
+    </S.List>
   );
 };
 

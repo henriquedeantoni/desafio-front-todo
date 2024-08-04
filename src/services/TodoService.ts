@@ -4,7 +4,7 @@ import {Todo} from '../types/Todo.ts';
 
 export const todosList = async ():Promise<Todo[]> => {
   try {
-    const response = await api.get('https://everest-interview-public-files.s3.amazonaws.com/input.json');
+    const response = await api.get('');
     
     return response.data.todos
     .filter((todo: any) => todo.id && typeof todo.content === 'string' && typeof todo.checked === 'boolean')

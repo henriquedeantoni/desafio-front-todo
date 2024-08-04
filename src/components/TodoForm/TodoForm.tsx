@@ -2,7 +2,7 @@ import React from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { Form, Card, Title, Textarea , Button, ErrorMessage } from './styles';
+import * as S from './styles';
 
 interface IFormInput {
   todo: string;
@@ -27,15 +27,15 @@ const TodoForm: React.FC<TodoFormProps> = ({ addTodo }) => {
   };
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit)}>
-      <Card>
-        <Title>New Task</Title>
+    <S.Form onSubmit={handleSubmit(onSubmit)}>
+      <S.Card>
+        <S.Title>New Task</S.Title>
         <label>Task Content:</label>
-        <Textarea placeholder="Type here..." {...register('todo')} error={!!errors.todo} />
-        <Button type="submit">Submit Task</Button>
-        {errors.todo && <ErrorMessage>{errors.todo?.message}</ErrorMessage>}
-      </Card>
-    </Form>
+        <S.Textarea placeholder="Type here..." {...register('todo')} error={!!errors.todo} />
+        <S.Button type="submit">Submit Task</S.Button>
+        {errors.todo && <S.ErrorMessage>{errors.todo?.message}</S.ErrorMessage>}
+      </S.Card>
+    </S.Form>
   );
 };
 
