@@ -1,24 +1,34 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import TodoForm from '../../components/TodoForm/TodoForm';
 import TodoList from '../../components/TodoList/TodoList';
 import Header from '../../components/Header/Header';
 import { PageContainer, ScanColumn, Body, ColumnContainer, Column } from './styles';
+import { todosList, Todo, TodoStatus } from '../../services/TodoService';
 
-enum TodoStatus {
-  Todo = 'todo',
-  InProgress = 'inprogress',
-  Concluded = 'concluded',
-}
+const API_URL = import.meta.env.VITE_APP_API_URL;
+console.log('API_URL:', API_URL);
 
-interface Todo {
-  id: number;
-  content: string;
-  status: TodoStatus;
-  checked: boolean;
-}
+
 
 const TodoPage: React.FC = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchTodos = async () => {
+      try {
+        const todosData = await todosList();
+        setTodos(todosData);
+      } catch (error) {
+        setError('Error to fetch the tasks');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchTodos();
+  }, []);
 
   const addTodo = (content: string) => {
     const newTodo: Todo = {
@@ -33,7 +43,7 @@ const TodoPage: React.FC = () => {
   const toggleCheck = (id: number) => {
     setTodos(prevTodos =>
       prevTodos.map(todo =>
-        todo.id === id ? { ...todo, isChecked: !todo.checked } : todo
+        todo.id === id ? { ...todo, checked: !todo.checked } : todo
       )
     );
   };
@@ -46,6 +56,8 @@ const TodoPage: React.FC = () => {
     setTodos(todos.filter(todo => todo.id !== id));
   };
 
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>{error}</p>;
 
   return (
     <PageContainer>

@@ -1,4 +1,4 @@
-import api from '../api/api';
+import api from '../api/api.ts';
 
 export enum TodoStatus {
     Todo = 'todo',
@@ -15,14 +15,21 @@ export interface Todo {
 
 export const todosList = async ():Promise<Todo[]> => {
   try {
-    const response = await api.get('/todos');
-    return response.data.todos.map((todo: any)=>({
-        ...todo,
-        checked: typeof todo.checked === 'boolean' ? todo.checked : !! todo.checked,
-        content: typeof todo.checked === 'string' ? todo.checked : todo.content.title,
+    const response = await api.get('https://everest-interview-public-files.s3.amazonaws.com/input.json');
+    
+    return response.data.todos
+    .filter((todo: any) => todo.id && typeof todo.content === 'string' && typeof todo.checked === 'boolean')
+    .map((todo: any)=>({
+        id: todo.id,
+        checked: todo.checked,
+        content: todo.content,
+        status: TodoStatus.Todo,
     }));
     } catch (error) {
-        console.error('Error ao buscar os todos:', error);
+        console.error('Error on get todos', error);
         throw error;
     }
 };
+
+
+

@@ -1,12 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { List, Task, Title, DeleteButton, ApproveButton} from './styles';
-import  {Todo} from '../../services/TodoService'
+import  {Todo, TodoStatus} from '../../services/TodoService'
 
-enum TodoStatus {
-  Todo = 'todo',
-  InProgress = 'inprogress',
-  Concluded = 'concluded',
-}
 
 interface TodoListProps {
   todos: Todo[];
@@ -23,7 +18,6 @@ const TodoList: React.FC<TodoListProps> = ({ todos, changeStatus, deleteTodo, to
       changeStatus(todo.id, TodoStatus.Concluded);
     }
   };
-
   
   return (
     <List>
