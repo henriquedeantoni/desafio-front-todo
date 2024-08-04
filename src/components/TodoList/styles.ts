@@ -17,12 +17,8 @@ export const Task = styled.li`
   padding: 10px;
   margin-bottom: 10px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  
-  input {
-    margin-right: 8px;
-  }
 
-  p {
+  h1 {
     flex: 1;
     font-size: 1rem;
     font-weight: 600;
@@ -40,6 +36,11 @@ export const Task = styled.li`
         font-size: 0.75rem;
         font-weight: 600;
         color: black;
+        width: 12rem;
+  }
+
+  input {
+    margin-right: 0.25rem;
   }
 
   span {
@@ -66,9 +67,23 @@ export const Button = styled.button`
 
 
 export const DeleteButton = styled(Button)`
-  background-color: #e53e3e; /* Red */
+  background-color: #e53e3e;
+  margin-top: 0.5rem;
 `;
 
 export const ApproveButton = styled(Button)`
-  background-color: #3182ce; /* Blue */
+  background-color: #3182ce;
+  margin-top: 0.5rem;
+`;
+
+export const Error = styled.p`
+  color: red;
+  font-size: 0.75rem;
+  font-weight: 500;
+  transition: opacity 3s ease-out;
+  opacity: 1; 
+  
+  &.fade-out {
+    opacity: 0;
+  }
 `;

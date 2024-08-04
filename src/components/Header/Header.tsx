@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { HeaderContainer, DivName, UserImage, SearchContainer, SearchInput, SearchIcon, DivSearch, Time } from './styles';
+import { HeaderContainer, DivName, UserImage, SearchContainer, UserLoginInput, SearchIcon, DivUser, Time } from './styles';
 import anonimous from '../../assets/anonimous.jpg'
 import logo from '../../assets/everest-logo.svg'
 import searchIcon from '../../assets/search-icon.png'
 
 interface HeaderProps {
   userName: string;
-  userImage: string;
 }
 
-const Header: React.FC<HeaderProps> = ({ userName, userImage }) => {
+const Header: React.FC<HeaderProps> = ({ userName }) => {
   const [localTime, setLocalTime] = useState<string>("");
 
   useEffect(()=>{
@@ -25,14 +24,14 @@ const Header: React.FC<HeaderProps> = ({ userName, userImage }) => {
         <p>Hello, {userName}  </p>
       </DivName>
       <h1>Todo List</h1>
-      <DivSearch >
+      <DivUser>
         <UserImage src={anonimous} alt="User-image" />
         <SearchContainer>
-          <SearchInput type="text" placeholder="Search..." />
+          <UserLoginInput type="text" placeholder="********" />
           <SearchIcon src={searchIcon} alt="Search" />
         </SearchContainer>
         <Time>Caxias do Sul, {localTime}</Time>
-      </DivSearch>
+      </DivUser>
     </HeaderContainer>
   );
 };

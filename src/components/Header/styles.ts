@@ -40,7 +40,7 @@ export const SearchContainer = styled.div`
   position: relative;
 `;
 
-export const SearchInput = styled.input`
+export const UserLoginInput = styled.input`
   padding: 0.5rem;
   border: 1px solid #f59e0b;
   border-radius: 0.375rem;
@@ -60,7 +60,7 @@ export const Time = styled.div`
 
 `
 
-export const DivSearch = styled.div`
+export const DivUser = styled.div`
   margin: 0 4rem;
   align-items: center;
   display: grid;

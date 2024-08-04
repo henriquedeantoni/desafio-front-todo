@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import TodoForm from '../../components/TodoForm/TodoForm';
 import TodoList from '../../components/TodoList/TodoList';
 import Header from '../../components/Header/Header';
@@ -14,12 +15,21 @@ const TodoPage: React.FC = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const [maxId, setMaxId] =useState<number>(0);
+
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const userName = queryParams.get('userName') || 'Guest';
 
   useEffect(() => {
     const fetchTodos = async () => {
       try {
         const todosData = await todosList();
         setTodos(todosData);
+
+        const currentMaxId = todosData.length > 0 ? Math.max(...todosData.map(todo => todo.id)) : 0;
+        setMaxId(currentMaxId);
+
       } catch (error) {
         setError('Error to fetch the tasks');
       } finally {
@@ -31,8 +41,12 @@ const TodoPage: React.FC = () => {
   }, []);
 
   const addTodo = (content: string) => {
+
+    const newId = maxId + 1;
+    setMaxId(newId);
+
     const newTodo: Todo = {
-      id: todos.length + 1,
+      id: newId,
       content,
       status: TodoStatus.Todo,
       checked: false,
@@ -48,8 +62,12 @@ const TodoPage: React.FC = () => {
     );
   };
 
-  const changeStatus = (id: number, status: TodoStatus) => {
-    setTodos(todos.map(todo => todo.id === id ? { ...todo, status } : todo));
+  const changeStatus = (id: number, status: TodoStatus, checked?: boolean) => {
+    setTodos(prevTodos =>
+      prevTodos.map(todo =>
+        todo.id === id ? { ...todo, status, checked: checked ?? todo.checked } : todo
+      )
+    );
   };
 
   const deleteTodo = (id: number) => {
@@ -61,16 +79,18 @@ const TodoPage: React.FC = () => {
 
   return (
     <PageContainer>
-      <Header userName="Henrique" userImage="path-to-user-image.jpg" />
+      <Header userName={userName}/>
       <Body>
+        <ColumnContainer>
         <ScanColumn>
           <TodoForm addTodo={addTodo} />
         </ScanColumn>
-        <ColumnContainer>
           <Column style={{ borderColor: '#3b82f6' , backgroundColor: '#60a5fa' }}>
             <h2>Todo</h2>
             <TodoList
-              todos={todos.filter(todo => todo.status === TodoStatus.Todo)}
+              todos={todos
+                .filter(todo => todo.status === TodoStatus.Todo)
+                .sort((a, b) => Number(a.checked) - Number(b.checked))}
               changeStatus={changeStatus}
               deleteTodo={deleteTodo}
               toggleCheck={toggleCheck}
@@ -79,7 +99,9 @@ const TodoPage: React.FC = () => {
           <Column style={{ borderColor: '#f59e0b' , backgroundColor: '#fbbf24' }}>
             <h2>In Progress</h2>
             <TodoList
-              todos={todos.filter(todo => todo.status === TodoStatus.InProgress)}
+              todos={todos
+                .filter(todo => todo.status === TodoStatus.InProgress)
+                .sort((a, b) => Number(a.checked) - Number(b.checked))}
               changeStatus={changeStatus}
               deleteTodo={deleteTodo}
               toggleCheck={toggleCheck}
@@ -88,7 +110,9 @@ const TodoPage: React.FC = () => {
           <Column style={{ borderColor: '#10b981' , backgroundColor: '#34d399' }}>
             <h2>Concluded</h2>
             <TodoList
-              todos={todos.filter(todo => todo.status === TodoStatus.Concluded)}
+              todos={todos
+                .filter(todo => todo.status === TodoStatus.Concluded)
+                .sort((a, b) => Number(a.checked) - Number(b.checked))}
               changeStatus={changeStatus}
               deleteTodo={deleteTodo}
               toggleCheck={toggleCheck}
