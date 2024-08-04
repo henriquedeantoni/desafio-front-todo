@@ -29,10 +29,10 @@ Este é um projeto de aplicação de lista de tarefas (TODO) desenvolvido com Re
 
 ## Telas
 
-![Tela TodoPage - Submmit a form and validate](assets/image_0.jpg)
-![Tela TodoPage - Error to approve a Task, must be checked first](assets/image_1.jpg)
-![Tela TodoPage - Task approved and assigned on In Progress](assets/image_2.jpg)
-![Tela TodoPage - Task approved and assigned on Concluded](assets/image_3.jpg)
+![Tela TodoPage - Submmit a form and validate](/src/assets/image_0.jpg)
+![Tela TodoPage - Error to approve a Task, must be checked first](/src/assets/image_1.jpg)
+![Tela TodoPage - Task approved and assigned on In Progress](/src/assets/image_2.jpg)
+![Tela TodoPage - Task approved and assigned on Concluded](/src/assets/image_3.jpg)
 
 ## Instalação e Configuração
 
