@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { List, Task, Title, DeleteButton, ApproveButton, Error} from './styles';
-import  {Todo, TodoStatus} from '../../services/TodoService'
-
+import {TodoStatus} from '../../types/TodoStatus';
+import {Todo} from '../../types/Todo';
 
 interface TodoListProps {
   todos: Todo[];
@@ -11,6 +11,7 @@ interface TodoListProps {
 }
 
 const TodoList: React.FC<TodoListProps> = ({ todos, changeStatus, deleteTodo, toggleCheck }) => {
+  const [errorTaskId, setErrorTaskId] = useState<number | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   const handleApprove = (todo: Todo) => {
@@ -19,10 +20,11 @@ const TodoList: React.FC<TodoListProps> = ({ todos, changeStatus, deleteTodo, to
         ? TodoStatus.InProgress
         : TodoStatus.Concluded;
 
-      
+      setErrorTaskId(null);
       changeStatus(todo.id, newStatus, false);
     } else {
       setError('Task must be checked to be approved.');
+      setErrorTaskId(todo.id);
     }
   };
 
@@ -55,7 +57,7 @@ const TodoList: React.FC<TodoListProps> = ({ todos, changeStatus, deleteTodo, to
               )}
               <DeleteButton onClick={() => deleteTodo(todo.id)}>Delete</DeleteButton>
             </div>
-            {error &&  <Error>{error}</Error>}
+            {errorTaskId === todo.id &&  <Error>{error}</Error>}
         </Task>
       ))}
     </List>

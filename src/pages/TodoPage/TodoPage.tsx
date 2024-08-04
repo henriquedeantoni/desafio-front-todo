@@ -4,7 +4,9 @@ import TodoForm from '../../components/TodoForm/TodoForm';
 import TodoList from '../../components/TodoList/TodoList';
 import Header from '../../components/Header/Header';
 import { PageContainer, ScanColumn, Body, ColumnContainer, Column } from './styles';
-import { todosList, Todo, TodoStatus } from '../../services/TodoService';
+import { todosList} from '../../services/TodoService';
+import {TodoStatus} from '../../types/TodoStatus';
+import {Todo} from '../../types/Todo';
 
 const API_URL = import.meta.env.VITE_APP_API_URL;
 console.log('API_URL:', API_URL);

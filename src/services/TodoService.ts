@@ -1,17 +1,6 @@
 import api from '../api/api.ts';
-
-export enum TodoStatus {
-    Todo = 'todo',
-    InProgress = 'inprogress',
-    Concluded = 'concluded',
-  }
-
-export interface Todo {
-    id: number;
-    content: string | { title: string };
-    checked: boolean;
-    status: TodoStatus;
-}
+import {TodoStatus} from '../types/TodoStatus.ts';
+import {Todo} from '../types/Todo.ts';
 
 export const todosList = async ():Promise<Todo[]> => {
   try {

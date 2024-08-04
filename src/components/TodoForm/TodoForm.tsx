@@ -17,6 +17,7 @@ const schema = yup.object().shape({
 });
 
 const TodoForm: React.FC<TodoFormProps> = ({ addTodo }) => {
+  
   const { register, handleSubmit, formState: { errors } } = useForm<IFormInput>({
     resolver: yupResolver(schema),
   });

@@ -63,17 +63,35 @@ export const Button = styled.button`
   cursor: pointer;
   color: white;
   font-weight: bold;
+
 `;
 
 
 export const DeleteButton = styled(Button)`
   background-color: #e53e3e;
   margin-top: 0.5rem;
+
+  &:hover {
+    opacity: 0.85; 
+  }
+
+  &:active {
+    opacity: 0.75; 
+  }
 `;
 
 export const ApproveButton = styled(Button)`
   background-color: #3182ce;
   margin-top: 0.5rem;
+
+  
+  &:hover {
+    opacity: 0.85;
+  }
+
+  &:active {
+    opacity: 0.75;
+  }
 `;
 
 export const Error = styled.p`
